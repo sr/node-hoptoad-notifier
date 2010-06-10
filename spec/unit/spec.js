@@ -155,16 +155,30 @@ JSpec.describe('Hoptoad', function() {
       xml.should.match(matcher);
     });
 
-    it('should include error type', function() {
+    it('should include provided error type', function() {
       var xml     = Hoptoad.generateXML({ type : 'SOME_CRAZY_ERROR' });
       var matcher = new RegExp('<class>SOME_CRAZY_ERROR</class>');
 
       xml.should.match(matcher);
     });
 
-    it('should include error message', function() {
+    it('should include default error type if not provided', function() {
+      var xml     = Hoptoad.generateXML({});
+      var matcher = new RegExp('<class>Error</class>');
+
+      xml.should.match(matcher);
+    });
+
+    it('should include provided error message', function() {
       var xml     = Hoptoad.generateXML({ message : 'Bad code.' });
       var matcher = new RegExp('<message>Bad code.</message>');
+
+      xml.should.match(matcher);
+    });
+
+    it('should include default error message if not provided', function() {
+      var xml     = Hoptoad.generateXML({});
+      var matcher = new RegExp('<message>Unknown error.</message>');
 
       xml.should.match(matcher);
     });
