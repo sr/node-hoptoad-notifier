@@ -115,6 +115,26 @@ JSpec.describe('Hoptoad', function() {
 
       backtraceXML.should.be_empty
     });
+
+    it('should handle non-string stack', function() {
+      var backtraceXML = Hoptoad.generateBacktrace({
+        stack : 1337
+      });
+
+      backtraceXML.should.be_empty
+    });
+
+    it('should handle nonexistent stack', function() {
+      var
+      backtraceXML = Hoptoad.generateBacktrace({});
+      backtraceXML.should.be_empty
+    });
+
+    it('should handle nonexistent error', function() {
+      var
+      backtraceXML = Hoptoad.generateBacktrace();
+      backtraceXML.should.be_empty
+    });
   });
 
   describe('generateXML', function() {
