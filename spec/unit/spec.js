@@ -61,6 +61,21 @@ JSpec.describe('Hoptoad', function() {
 
       Hoptoad.notify({});
     });
+
+    it('should set environment from NODE_ENV if provided', function() {
+      process.env['NODE_ENV'] = 'staging';
+
+      Hoptoad.notify({});
+      Hoptoad.ENVIRONMENT.should.eql('staging');
+    });
+
+    it('should not overwrite environment from NODE_ENV if already set', function() {
+      process.env['NODE_ENV'] = 'test';
+
+      Hoptoad.environment = 'staging';
+      Hoptoad.notify({});
+      Hoptoad.ENVIRONMENT.should.eql('staging');
+    });
   });
 
   describe('environment=', function() {
