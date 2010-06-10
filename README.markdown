@@ -1,4 +1,4 @@
-# hoptoad-notifier.js
+# node-hoptoad-notifier
 
 Report exceptions to Hoptoad from node.js.
 

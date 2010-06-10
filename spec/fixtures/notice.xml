@@ -2,9 +2,9 @@
 <notice version="2.0">
   <api-key>API_KEY</api-key>
   <notifier>
-    <name>hoptoad-notifier-js</name>
+    <name>node-hoptoad-notifier</name>
     <version>0.1.0</version>
-    <url>http://github.com/tristandunn/hoptoad-notifier-js</url>
+    <url>http://github.com/tristandunn/node-hoptoad-notifier</url>
   </notifier>
   <error>
     <class>EXCEPTION_CLASS</class>
