@@ -5,7 +5,7 @@ Report exceptions to Hoptoad from node.js.
 ## Example
 
     var
-    Hoptoad = require('./hoptoad-notifier').Hoptoad;
+    Hoptoad = require('./lib/hoptoad-notifier').Hoptoad;
     Hoptoad.key = 'YOUR_API_KEY';
 
     process.addListener('uncaughtException', function(error) {
