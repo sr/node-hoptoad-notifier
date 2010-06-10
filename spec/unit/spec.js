@@ -29,6 +29,8 @@ JSpec.describe('Hoptoad', function() {
       var HTTP = require('http');
 
       JSpec.context = undefined;
+      Hoptoad.ENVIRONMENT = undefined;
+      process.env['NODE_ENV'] = undefined;
 
       destub(HTTP);
       destub(Hoptoad);
@@ -75,6 +77,11 @@ JSpec.describe('Hoptoad', function() {
       Hoptoad.environment = 'staging';
       Hoptoad.notify({});
       Hoptoad.ENVIRONMENT.should.eql('staging');
+    });
+
+    it('should default environment to production if not set', function() {
+      Hoptoad.notify({});
+      Hoptoad.ENVIRONMENT.should.eql('production');
     });
   });
 
