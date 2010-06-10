@@ -63,6 +63,21 @@ JSpec.describe('Hoptoad', function() {
     });
   });
 
+  describe('environment=', function() {
+    it('should default environment in notice XML to production', function() {
+      var matcher = new RegExp('<environment-name>production</environment-name>');
+
+      Hoptoad.NOTICE_XML.should.match(matcher);
+    });
+
+    it('should update environment in notice XML', function() {
+      var matcher = new RegExp('<environment-name>staging</environment-name>');
+
+      Hoptoad.environment = 'staging';
+      Hoptoad.NOTICE_XML.should.match(matcher);
+    });
+  });
+
   describe('key=', function() {
     it('should insert API key into notice XML', function() {
       var key     = 'EXAMPLE_KEY';
