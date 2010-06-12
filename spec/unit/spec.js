@@ -141,10 +141,12 @@ JSpec.describe('Hoptoad', function() {
 
     it('should not include lines that do not match', function() {
       var backtraceXML = Hoptoad.generateBacktrace({
-        stack : "  node.js (file.js:1:2)"
+        stack : "  at Timeout.callback (file.js:10:1)\n" +
+                "  node.js (file.js:1:2)"
       });
 
-      backtraceXML.should.be_empty
+      backtraceXML.should_not.be_empty
+      backtraceXML.should_not.include('node.js')
     });
 
     it('should handle non-string stack', function() {
@@ -152,19 +154,12 @@ JSpec.describe('Hoptoad', function() {
         stack : 1337
       });
 
-      backtraceXML.should.be_empty
+      backtraceXML.should_not.be_empty
     });
 
     it('should handle nonexistent stack', function() {
-      var
-      backtraceXML = Hoptoad.generateBacktrace({});
-      backtraceXML.should.be_empty
-    });
-
-    it('should handle nonexistent error', function() {
-      var
-      backtraceXML = Hoptoad.generateBacktrace();
-      backtraceXML.should.be_empty
+      Hoptoad.generateBacktrace().should_not.be_empty
+      Hoptoad.generateBacktrace({}).should_not.be_empty
     });
   });
 
