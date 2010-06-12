@@ -12,6 +12,23 @@ Report exceptions to Hoptoad from node.js.
       Hoptoad.notify(error);
     });
 
+## Configuration
+
+### API Key (required)
+
+You can set your project API key with the `HOPTOAD_API_KEY` environment
+variable or dynamically with:
+
+    Hoptoad.key = 'YOUR_API_KEY';
+
+### Environment (optional)
+
+The environment defaults to `production`. You can overwrite it by setting a
+`RACK_ENV` or `NODE_ENV` environment variable. Additionally you can overwrite
+it dynamically with:
+
+    Hoptoad.environment = 'staging';
+
 ## Testing
 
 Run the [jspec](http://github.com/visionmedia/jspec) tests with:
