@@ -131,6 +131,14 @@ JSpec.describe('Hoptoad', function() {
       backtraceXML.should.eql(['<line method="Timeout.callback" file="file.js" number="10" />', '<line method="fakeFunction" file="file2.js" number="100" />']);
     });
 
+    it('should escape method and file attributes', function() {
+      var backtraceXML = Hoptoad.generateBacktrace({
+        stack : " at Timeout.<anonymous> (\'&\".js:10:1)"
+      });
+
+      backtraceXML.should.eql(['<line method="Timeout.&#60;anonymous&#62;" file="&#39;&#38;&#34;.js" number="10" />']);
+    });
+
     it('should not include lines that do not match', function() {
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : "  node.js (file.js:1:2)"
@@ -192,6 +200,13 @@ JSpec.describe('Hoptoad', function() {
       xml.should.match(matcher);
     });
 
+    it('should escape error type', function() {
+      var xml     = Hoptoad.generateXML({ type : '"&\'<>' });
+      var matcher = new RegExp('<class>&#34;&#38;&#39;&#60;&#62;</class>');
+
+      xml.should.match(matcher);
+    });
+
     it('should include provided error message', function() {
       var xml     = Hoptoad.generateXML({ message : 'Bad code.' });
       var matcher = new RegExp('<message>Bad code.</message>');
@@ -202,6 +217,13 @@ JSpec.describe('Hoptoad', function() {
     it('should include default error message if not provided', function() {
       var xml     = Hoptoad.generateXML({});
       var matcher = new RegExp('<message>Unknown error.</message>');
+
+      xml.should.match(matcher);
+    });
+
+    it('should escape error message', function() {
+      var xml     = Hoptoad.generateXML({ message : '"&\'<>' });
+      var matcher = new RegExp('<message>&#34;&#38;&#39;&#60;&#62;</message>');
 
       xml.should.match(matcher);
     });
