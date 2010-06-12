@@ -42,7 +42,8 @@ JSpec.describe('Hoptoad', function() {
       context.client.should.receive('request', 'once')
                            .with_args('POST',
                                       '/notifier_api/v2/notices',
-                                      { 'Content-Type'   : 'text/xml',
+                                      { 'Host'           : 'hoptoadapp.com',
+                                        'Content-Type'   : 'text/xml',
                                         'Content-Length' : context.xml.length });
 
       Hoptoad.notify({});
