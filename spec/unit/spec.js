@@ -28,8 +28,9 @@ JSpec.describe('Hoptoad', function() {
     after_each(function() {
       var HTTP = require('http');
 
-      JSpec.context = undefined;
-      Hoptoad.ENVIRONMENT = undefined;
+      JSpec.context           = undefined;
+      Hoptoad.ENVIRONMENT     = undefined;
+      process.env['RACK_ENV'] = undefined;
       process.env['NODE_ENV'] = undefined;
 
       destub(HTTP);
@@ -65,6 +66,13 @@ JSpec.describe('Hoptoad', function() {
       Hoptoad.notify({});
     });
 
+    it('should set environment from RACK_ENV if provided', function() {
+      process.env['RACK_ENV'] = 'qa';
+
+      Hoptoad.notify({});
+      Hoptoad.ENVIRONMENT.should.eql('qa');
+    });
+
     it('should set environment from NODE_ENV if provided', function() {
       process.env['NODE_ENV'] = 'staging';
 
@@ -72,7 +80,8 @@ JSpec.describe('Hoptoad', function() {
       Hoptoad.ENVIRONMENT.should.eql('staging');
     });
 
-    it('should not overwrite environment from NODE_ENV if already set', function() {
+    it('should not overwrite environment from RACK_ENV or NODE_ENV if already set', function() {
+      process.env['RACK_ENV'] = 'test';
       process.env['NODE_ENV'] = 'test';
 
       Hoptoad.environment = 'staging';
@@ -87,17 +96,16 @@ JSpec.describe('Hoptoad', function() {
   });
 
   describe('environment=', function() {
-    it('should default environment in notice XML to production', function() {
-      var matcher = new RegExp('<environment-name>production</environment-name>');
-
-      Hoptoad.NOTICE_XML.should.match(matcher);
-    });
-
     it('should update environment in notice XML', function() {
       var matcher = new RegExp('<environment-name>staging</environment-name>');
 
       Hoptoad.environment = 'staging';
       Hoptoad.NOTICE_XML.should.match(matcher);
+    });
+
+    it('should set ENVIRONMENT variable', function() {
+      Hoptoad.environment = 'staging'
+      Hoptoad.ENVIRONMENT.should.eql('staging');
     });
   });
 
