@@ -66,6 +66,13 @@ JSpec.describe('Hoptoad', function() {
       Hoptoad.notify({});
     });
 
+    it('should set key from HOTPOAD_API_KEY if present', function() {
+      process.env['HOPTOAD_API_KEY'] = '1234abcd';
+
+      Hoptoad.notify({});
+      Hoptoad.API_KEY.should.eql('1234abcd');
+    });
+
     it('should set environment from RACK_ENV if provided', function() {
       process.env['RACK_ENV'] = 'qa';
 
