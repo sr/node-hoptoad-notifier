@@ -154,6 +154,15 @@ JSpec.describe('Hoptoad', function() {
       backtraceXML.should.eql(['<line method="Timeout.&#60;anonymous&#62;" file="&#39;&#38;&#34;.js" number="10" />']);
     });
 
+    it('should replace root path with [PROJECT_ROOT] in file path', function() {
+      var path         = Hoptoad.ROOT;
+      var backtraceXML = Hoptoad.generateBacktrace({
+        stack : " at exampleFunction (" + path + "/file.js:10:1)"
+      });
+
+      backtraceXML.should.eql(['<line method="exampleFunction" file="[PROJECT_ROOT]/file.js" number="10" />']);
+    });
+
     it('should not include lines that do not match', function() {
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : "  at Timeout.callback (file.js:10:1)\n" +
