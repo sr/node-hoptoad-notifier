@@ -124,16 +124,6 @@ JSpec.describe('Hoptoad', function() {
       Hoptoad.key = key;
       Hoptoad.NOTICE_XML.should.match(matcher);
     });
-
-    it('should not overwrite an existing API key', function() {
-      var key     = 'EXAMPLE_KEY';
-      var matcher = new RegExp('<api-key>' + key + '</api-key>');
-
-      Hoptoad.key = key;
-      Hoptoad.key = 'SECOND_KEY';
-
-      Hoptoad.NOTICE_XML.should.match(matcher)
-    });
   });
 
   describe('generateBacktrace', function() {
