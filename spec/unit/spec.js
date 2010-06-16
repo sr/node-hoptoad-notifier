@@ -163,6 +163,18 @@ JSpec.describe('Hoptoad', function() {
       backtraceXML.should_not.include('node.js')
     });
 
+    it('should support custom filters', function() {
+      Hoptoad.BACKTRACE_FILTERS.push(/filter\.js/);
+
+      var backtraceXML = Hoptoad.generateBacktrace({
+        stack : "  at Timeout.callback (file.js:10:1)\n" +
+                "  at Timeout.callback (filter.js:1:2)"
+      }).join('');
+
+      backtraceXML.should_not.be_empty
+      backtraceXML.should_not.include('filter.js');
+    });
+
     it('should handle non-string stack', function() {
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : 1337

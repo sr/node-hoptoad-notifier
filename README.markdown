@@ -29,6 +29,14 @@ it dynamically with:
 
     Hoptoad.environment = 'staging';
 
+### Custom Backtrace Filters
+
+Lines in the backtrace containing "hoptoad-notifier.js" are filtered by
+default. You can add custom filters by pushing regular expressions on the
+`BACKTRACE_FILTERS` variable:
+
+      Hoptoad.BACKTRACE_FILTERS.push(/filter this line/);
+
 ## Testing
 
 Run the [jspec](http://github.com/visionmedia/jspec) tests with:
