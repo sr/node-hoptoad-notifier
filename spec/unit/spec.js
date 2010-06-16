@@ -157,7 +157,7 @@ JSpec.describe('Hoptoad', function() {
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : "  at Timeout.callback (file.js:10:1)\n" +
                 "  node.js (file.js:1:2)"
-      });
+      }).join('');
 
       backtraceXML.should_not.be_empty
       backtraceXML.should_not.include('node.js')
