@@ -33,9 +33,9 @@ it dynamically with:
 
 Lines in the backtrace containing "hoptoad-notifier.js" are filtered by
 default. You can add custom filters by pushing regular expressions on the
-`BACKTRACE_FILTERS` variable:
+`backtrace_filters` variable:
 
-    Hoptoad.BACKTRACE_FILTERS.push(/filter this line/);
+    Hoptoad.backtrace_filters.push(/filter this line/);
 
 ## Testing
 

@@ -164,7 +164,7 @@ JSpec.describe('Hoptoad', function() {
     });
 
     it('should support custom filters', function() {
-      Hoptoad.BACKTRACE_FILTERS.push(/filter\.js/);
+      Hoptoad.backtrace_filters.push(/filter\.js/);
 
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : "  at Timeout.callback (file.js:10:1)\n" +
