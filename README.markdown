@@ -31,7 +31,7 @@ it dynamically with:
 
 ### Custom Backtrace Filters
 
-Lines in the backtrace containing "hoptoad-notifier.js" are filtered by
+Lines in the backtrace containing `hoptoad-notifier.js` are filtered by
 default. You can add custom filters by pushing regular expressions on the
 `backtrace_filters` variable:
 
