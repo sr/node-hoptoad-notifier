@@ -145,7 +145,7 @@ JSpec.describe('Hoptoad', function() {
     });
 
     it('should replace root path with [PROJECT_ROOT] in file path', function() {
-      var path         = Hoptoad.root;
+      var path         = Hoptoad.ROOT;
       var backtraceXML = Hoptoad.generateBacktrace({
         stack : " at exampleFunction (" + path + "/file.js:10:1)"
       });
