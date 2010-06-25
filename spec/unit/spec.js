@@ -255,5 +255,26 @@ JSpec.describe('Hoptoad', function() {
 
       xml.should.match(matcher);
     });
+
+    it('should include URL and component', function() {
+      var xml     = Hoptoad.generateXML({ url : '/', component : 'Home' });
+      var matcher = new RegExp('<request><url>/</url><component>Home</component>.*</request>');
+
+      xml.should.match(matcher);
+    });
+
+    it('should remove request if no URL and component provided', function() {
+      var xml     = Hoptoad.generateXML({});
+      var matcher = new RegExp('<request>.*</request>');
+
+      xml.should_not.match(matcher);
+    });
+
+    it('should include action', function() {
+      var xml     = Hoptoad.generateXML({ url : '/', component : 'Home', action : 'index' });
+      var matcher = new RegExp('<request>.*<action>index</action>.*</request>');
+
+      xml.should.match(matcher);
+    });
   });
 });
